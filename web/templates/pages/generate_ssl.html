@@ -1,6 +1,6 @@
 <div class="l-center">
-  <div class="l-sort clearfix">
-    <div class="l-sort-toolbar clearfix float-left">
+  <div class="l-sort">
+    <div class="l-sort-toolbar">
       <?php show_alert_message($_SESSION);?>
     </div>
   </div>
@@ -14,8 +14,8 @@
     <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
     <input type="hidden" name="generate" value="generate">
 
-    <div class="app-form">
-      <h1 class="page-title"><?=_('Generating CSR');?></h1>
+    <div class="form-container">
+      <h1 class="form-title"><?=_('Generating CSR');?></h1>
       <div class="u-input-width">
         <div class="u-mb10">
           <label for="v_domain" class="form-label"><?=_('Domain');?></label>
@@ -58,8 +58,12 @@
           <input type="text" class="form-control" name="v_org" id="v_org" value="<?=htmlentities(trim($v_org, "'")) ?>">
         </div>
         <div class="u-side-by-side">
-          <div><input type="submit" class="button" name="generate" value="<?=_('Ok');?>"></div>
-          <div class="u-ml10"><input type="button" class="button cancel" value="<?=_('Back');?>" onclick="<?=$back?>"></div>
+          <button type="submit" class="button" name="generate">
+            <?=_('Ok');?>
+          </button>
+          <button type="button" class="button button-secondary" onclick="<?=$back?>">
+            <?=_('Back');?>
+          </button>
         </div>
       </div>
     </div>

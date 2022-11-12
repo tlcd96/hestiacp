@@ -1,38 +1,36 @@
 <!-- Begin toolbar -->
 <div class="l-center">
-  <div class="l-sort clearfix noselect">
+  <div class="l-sort">
     <div class="l-unit-toolbar__buttonstrip">
       <?php if ($read_only !== 'true') {?>
-        <a href="/schedule/backup/?token=<?=$_SESSION['token']?>" class="ui-button cancel" dir="ltr"><i class="fas fa-plus-circle status-icon green"></i><?=_('Create Backup');?></a>
-        <a href="/list/backup/exclusions/" class="ui-button cancel" dir="ltr"><i class="fas fa-folder-minus status-icon orange"></i><?=_('backup exclusions');?></a>
+        <a href="/schedule/backup/?token=<?=$_SESSION['token']?>" class="button button-secondary"><i class="fas fa-plus-circle status-icon green"></i><?=_('Create Backup');?></a>
+        <a href="/list/backup/exclusions/" class="button button-secondary"><i class="fas fa-folder-minus status-icon orange"></i><?=_('backup exclusions');?></a>
       <?php } ?>
     </div>
-    <div class="l-sort-toolbar clearfix">
-      <table>
-        <tr>
-          <td class="l-sort-toolbar__search-box">
-            <form action="/search/" method="get">
-              <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-              <input type="text" class="search-input" name="q" value="<? echo isset($_POST['q']) ? htmlspecialchars($_POST['q']) : '' ?>" title="<?=_('Search');?>">
-              <button type="submit" class="l-sort-toolbar__filter-apply" onclick="return doSearch('/search/')" value="" title="<?=_('Search');?>"><i class="fas fa-search"></i></button>
-            </form>
-          </td>
-          <?php if ($read_only !== 'true') {?>
-            <td>
-              <form action="/bulk/backup/" method="post" id="objects">
-                <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-                <div class="l-select">
-                  <select name="action" id="">
-                    <option value=""><?=_('apply to selected');?></option>
-                    <option value="delete"><?=_('delete') ?></option>
-                  </select>
-                </div>
-                <button type="submit" class="l-sort-toolbar__filter-apply" value="" title="<?=_('apply to selected');?>"><i class="fas fa-arrow-right"></i></button>
-              </form>
-            </td>
-          <?php } ?>
-        </tr>
-      </table>
+    <div class="l-sort-toolbar">
+      <?php if ($read_only !== 'true') {?>
+        <form action="/bulk/backup/" method="post" id="objects">
+          <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+          <div class="l-select">
+            <select name="action" id="">
+              <option value=""><?=_('apply to selected');?></option>
+              <option value="delete"><?=_('delete') ?></option>
+            </select>
+          </div>
+          <button type="submit" class="l-sort-toolbar__filter-apply" value="" title="<?=_('apply to selected');?>">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      <?php } ?>
+      <div class="l-sort-toolbar__search-box">
+        <form action="/search/" method="get">
+          <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+          <input type="text" class="search-input" name="q" value="<? echo isset($_POST['q']) ? htmlspecialchars($_POST['q']) : '' ?>" title="<?=_('Search');?>">
+          <button type="submit" class="l-sort-toolbar__filter-apply" onclick="return doSearch('/search/')" value="" title="<?=_('Search');?>">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -92,7 +90,7 @@
           </div>
           <!-- START QUICK ACTION TOOLBAR AREA -->
           <div class="clearfix l-unit__stat-col--left compact-4 text-right">
-            <div class="l-unit-toolbar__col l-unit-toolbar__col--right noselect">
+            <div class="l-unit-toolbar__col l-unit-toolbar__col--right u-noselect">
               <div class="actions-panel clearfix">
                 <?php if (($_SESSION['userContext'] === 'admin') && ($_SESSION['look'] === 'admin') && ($read_only === 'true')) {?>
                   <!-- Restrict ability to restore or delete backups when impersonating 'admin' account -->

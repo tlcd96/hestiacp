@@ -1,7 +1,7 @@
 <!-- Begin toolbar -->
 <div class="l-center">
-  <div class="l-sort clearfix noselect">
-    <div class="l-sort-toolbar clearfix float-left">
+  <div class="l-sort">
+    <div class="l-sort-toolbar">
 
     </div>
   </div>
@@ -15,8 +15,8 @@
   <form id="vstobjects" name="v_generate_csr" method="post">
     <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
 
-    <div class="app-form">
-      <h1 class="page-title"><?=_('Generating CSR');?></h1>
+    <div class="form-container">
+      <h1 class="form-title"><?=_('Generating CSR');?></h1>
       <?php show_alert_message($_SESSION);?>
       <div class="u-wide-input-width">
         <div class="u-mb20">
@@ -41,7 +41,9 @@
           <textarea class="form-control u-min-height100" name="v_csr" id="v_csr"><?=$v_csr ?></textarea>
         </div>
         <div>
-          <input type="button" class="button cancel" value="<?=_('Back');?>" onclick="<?=$back ?>">
+          <button type="button" class="button button-secondary" onclick="<?=$back?>">
+            <?=_('Back');?>
+          </button>
         </div>
       </div>
     </div>

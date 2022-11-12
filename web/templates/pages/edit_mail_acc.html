@@ -1,11 +1,11 @@
 <!-- Begin toolbar -->
-<div class="l-center edit">
-  <div class="l-sort clearfix">
+<div class="l-center">
+  <div class="l-sort">
     <div class="l-unit-toolbar__buttonstrip">
-      <a class="ui-button cancel" dir="ltr" id="btn-back" href="/list/mail/?domain=<?=htmlentities(trim($v_domain, "'"))?>&token=<?=$_SESSION['token']?>"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
+      <a class="button button-secondary" id="btn-back" href="/list/mail/?domain=<?=htmlentities(trim($v_domain, "'"))?>&token=<?=$_SESSION['token']?>"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
     </div>
-    <div class="l-unit-toolbar__buttonstrip float-right">
-      <a href="#" class="ui-button" data-action="submit" data-id="vstobjects"><i class="fas fa-save status-icon purple"></i><?=_('Save');?></a>
+    <div class="l-unit-toolbar__buttonstrip">
+      <a href="#" class="button" data-action="submit" data-id="vstobjects"><i class="fas fa-save status-icon purple"></i><?=_('Save');?></a>
     </div>
   </div>
 </div>
@@ -19,8 +19,8 @@
     <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
     <input type="hidden" name="save" value="save">
 
-    <div class="app-form">
-      <h1 class="page-title"><?=_('Editing Mail Account');?></h1>
+    <div class="form-container">
+      <h1 class="form-title"><?=_('Editing Mail Account');?></h1>
       <?php show_alert_message($_SESSION);?>
       <div style="display: flex; justify-content: space-between;">
         <div class="u-input-width">
@@ -51,7 +51,7 @@
               <?=_('Send login credentials to email address') ?>
             </label>
             <input type="email" class="form-control" name="v_send_email" id="v_send_email" value="<?=htmlentities(trim($v_send_email, "'"))?>">
-            <input type="hidden" name="v_credentials" id="v_credentials">
+            <input type="hidden" name="v_credentials" class="js-hidden-credentials">
           </div>
           <div class="u-mb10">
             <label for="v_quota" class="form-label">
@@ -68,14 +68,14 @@
             </label>
             <textarea class="form-control" name="v_aliases" id="v_aliases"><?=htmlentities(trim($v_aliases, "'"))?></textarea>
           </div>
-          <div class="form-check u-mb10">
+          <div class="form-check">
             <input class="form-check-input" type="checkbox" name="v_blackhole" id="v_blackhole" <?php if ($v_blackhole == 'yes') echo 'checked' ?>>
             <label for="v_blackhole">
               <?=_('Discard all mail');?>
             </label>
           </div>
-          <div <?php if ($v_blackhole == 'yes') echo 'style="display:none"'; ?> id="id_fwd_for">
-            <div class="form-check u-mb10">
+          <div id="id_fwd_for" style="display:<?php if ($v_blackhole == 'yes') {echo 'none';} else {echo 'block';}?> ;">
+            <div class="form-check">
               <input class="form-check-input" type="checkbox" name="v_fwd_only" id="v_fwd_for" <?php if ($v_fwd_only == 'yes') echo 'checked' ?>>
               <label for="v_fwd_for">
                 <?=_('Do not store forwarded mail');?>
@@ -113,9 +113,10 @@
           <div class="mail-infoblock">
             <table>
               <tr><td colspan="2"><strong><?=strtoupper(_('Common account settings'));?></strong></td><tr>
-              <tr><td><?=_('Username');?>: </td><td><span id="v_account"></span>@<?=htmlentities(trim($v_domain, "'"))?></td></tr>
-              <tr><td><?=_('Password');?>: </td><td><span id="v_password"></span></td></tr>
-              <?php if ($_SESSION['WEBMAIL_SYSTEM']) {?><tr><td><?=_('Webmail');?>: </td><td><a class="vst" href="http://<?=htmlentities($v_webmail_alias)?>" target="_blank">http://<?=htmlentities($v_webmail_alias)?></a></td></tr><?php } ?>
+              <tr><td><?=_('Username');?>: </td><td><span class="js-account-output"></span>@<?=htmlentities(trim($v_domain, "'"))?></td></tr>
+              <tr><td><?=_('Password');?>: </td><td><span class="js-password-output"></span></td></tr>
+              <?php if ($_SESSION['WEBMAIL_SYSTEM']) {?><tr><td><?=_('Webmail');?>: </td><td><a class="vst" href="http://<?=htmlentities($v_webmail_alias)?>" target="_blank">http://<?=htmlentities($v_webmail_alias)?></a></td></tr>
+              <?php } ?>
               <tr><td><?=_('Hostname');?>: </td><td>mail.<?=htmlentities($v_domain)?></td></tr>
 
               <tr><td colspan="2"><strong><?=strtoupper(_('IMAP settings'));?></strong></td></tr>

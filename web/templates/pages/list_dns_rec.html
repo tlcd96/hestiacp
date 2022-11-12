@@ -1,57 +1,55 @@
 <!-- Begin toolbar -->
 <div class="l-center">
-  <div class="l-sort clearfix noselect">
+  <div class="l-sort">
     <div class="l-unit-toolbar__buttonstrip">
-      <a class="ui-button cancel" dir="ltr" id="btn-back" href="/list/dns/"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
+      <a class="button button-secondary" id="btn-back" href="/list/dns/"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
       <?php if ($read_only !== 'true') {?>
-        <a href="/add/dns/?domain=<?=htmlentities($_GET['domain'])?>" id="btn-create" class="ui-button cancel" dir="ltr"><i class="fas fa-plus-circle status-icon green"></i> <?=_('Add Record');?></a>
-        <a href="/edit/dns/?domain=<?=htmlentities($_GET['domain'])?>" id="btn-create" class="ui-button cancel" dir="ltr"><i class="fas fa-pencil-alt status-icon blue"></i> <?=_('Editing DNS Domain');?></a>
+        <a href="/add/dns/?domain=<?=htmlentities($_GET['domain'])?>" class="button button-secondary" id="btn-create"><i class="fas fa-plus-circle status-icon green"></i> <?=_('Add Record');?></a>
+        <a href="/edit/dns/?domain=<?=htmlentities($_GET['domain'])?>" class="button button-secondary" id="btn-create"><i class="fas fa-pencil-alt status-icon blue"></i> <?=_('Editing DNS Domain');?></a>
       <?php } ?>
     </div>
-    <ul class="context-menu sort-order animated fadeIn" style="display:none;">
-      <li entity="sort-date" sort_as_int="1"><span class="name <?php if ($_SESSION['userSortOrder'] === 'date') { echo 'active'; } ?>"><?=_('Date');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
-      <li entity="sort-value"><span class="name"><?=_('IP or Value');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
-      <li entity="sort-record"><span class="name"><?=_('Record');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
-      <li entity="sort-ttl" sort_as_int="1"><span class="name"><?=_('TTL');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
-      <li entity="sort-type"><span class="name"><?=_('Type');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
-    </ul>
-    <div class="l-sort-toolbar clearfix">
-      <table>
-        <tr>
-          <td class="sort-by" title="<?=_('Sort items');?>">
-            <?=_('sort by');?>: <span>
-              <b>
-                <?php if ($_SESSION['userSortOrder'] === 'name') { $label = _('Record'); } else { $label = _('Date'); } ?>
-                <?=$label;?> <i class="fas fa-sort-alpha-down"></i>
-              </b>
-            </span>
-          </td>
-          <td class="l-sort-toolbar__search-box">
-            <form action="/search/" method="get">
-              <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-              <input type="text" class="search-input" name="q" value="<? echo isset($_POST['q']) ? htmlspecialchars($_POST['q']) : '' ?>" title="<?=_('Search');?>">
-              <button type="submit" class="l-sort-toolbar__filter-apply" onclick="return doSearch('/search/')" value="" title="<?=_('Search');?>"><i class="fas fa-search"></i></button>
-            </form>
-          </td>
-          <?php if ($read_only !== 'true') {?>
-            <td>
-              <form action="/bulk/dns/" method="post" id="objects">
-                <input type="hidden" name="domain" value="<?=htmlentities($_GET['domain'])?>">
-                <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-                <div class="l-select">
-                  <select name="action" id="">
-                    <option value=""><?=_('apply to selected');?></option>
-                    <option value="suspend"><?=_('suspend');?></option>
-                    <option value="unsuspend"><?=_('unsuspend');?></option>
-                    <option value="delete"><?=_('delete');?></option>
-                  </select>
-                </div>
-                <button type="submit" class="l-sort-toolbar__filter-apply" value="" title="<?=_('apply to selected');?>"><i class="fas fa-arrow-right"></i></button>
-              </form>
-            </td>
-          <?php } ?>
-        </tr>
-      </table>
+    <div class="l-sort-toolbar">
+      <ul class="context-menu sort-order animated fadeIn" style="display:none;">
+        <li entity="sort-date" sort_as_int="1"><span class="name <?php if ($_SESSION['userSortOrder'] === 'date') { echo 'active'; } ?>"><?=_('Date');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
+        <li entity="sort-value"><span class="name"><?=_('IP or Value');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
+        <li entity="sort-record"><span class="name"><?=_('Record');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
+        <li entity="sort-ttl" sort_as_int="1"><span class="name"><?=_('TTL');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
+        <li entity="sort-type"><span class="name"><?=_('Type');?> <i class="fas fa-sort-alpha-down"></i></span><span class="up"><i class="fas fa-sort-alpha-up"></i></span></li>
+      </ul>
+      <div class="sort-by" title="<?=_('Sort items');?>">
+        <?=_('sort by');?>: <span>
+          <b>
+            <?php if ($_SESSION['userSortOrder'] === 'name') { $label = _('Record'); } else { $label = _('Date'); } ?>
+            <?=$label;?> <i class="fas fa-sort-alpha-down"></i>
+          </b>
+        </span>
+      </div>
+      <?php if ($read_only !== 'true') {?>
+        <form action="/bulk/dns/" method="post" id="objects">
+          <input type="hidden" name="domain" value="<?=htmlentities($_GET['domain'])?>">
+          <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+          <div class="l-select">
+            <select name="action" id="">
+              <option value=""><?=_('apply to selected');?></option>
+              <option value="suspend"><?=_('suspend');?></option>
+              <option value="unsuspend"><?=_('unsuspend');?></option>
+              <option value="delete"><?=_('delete');?></option>
+            </select>
+          </div>
+          <button type="submit" class="l-sort-toolbar__filter-apply" value="" title="<?=_('apply to selected');?>">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      <?php } ?>
+      <div class="l-sort-toolbar__search-box">
+        <form action="/search/" method="get">
+          <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+          <input type="text" class="search-input" name="q" value="<? echo isset($_POST['q']) ? htmlspecialchars($_POST['q']) : '' ?>" title="<?=_('Search');?>">
+          <button type="submit" class="l-sort-toolbar__filter-apply" onclick="return doSearch('/search/')" value="" title="<?=_('Search');?>">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -108,7 +106,7 @@
         </div>
       <!-- START QUICK ACTION TOOLBAR AREA -->
       <div class="clearfix l-unit__stat-col--left super-compact text-right">
-        <div class="l-unit-toolbar__col l-unit-toolbar__col--right noselect">
+        <div class="l-unit-toolbar__col l-unit-toolbar__col--right u-noselect">
           <div class="actions-panel clearfix">
             <?php if ($read_only === 'true') {?>
               <!-- Restrict editing of DNS records when impersonating 'admin' account -->

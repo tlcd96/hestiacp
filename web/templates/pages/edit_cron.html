@@ -1,11 +1,11 @@
 <!-- Begin toolbar -->
-<div class="l-center edit">
-  <div class="l-sort clearfix">
+<div class="l-center">
+  <div class="l-sort">
     <div class="l-unit-toolbar__buttonstrip">
-      <a class="ui-button cancel" dir="ltr" id="btn-back" href="/list/cron/"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
+      <a class="button button-secondary" id="btn-back" href="/list/cron/"><i class="fas fa-arrow-left status-icon blue"></i><?=_('Back');?></a>
     </div>
-    <div class="l-unit-toolbar__buttonstrip float-right">
-      <a href="#" class="ui-button" data-action="submit" data-id="vstobjects"><i class="fas fa-save status-icon purple"></i><?=_('Save');?></a>
+    <div class="l-unit-toolbar__buttonstrip">
+      <a href="#" class="button" data-action="submit" data-id="vstobjects"><i class="fas fa-save status-icon purple"></i><?=_('Save');?></a>
     </div>
   </div>
 </div>
@@ -30,7 +30,7 @@
           <input type="hidden" name="h_day" value="*">
           <input type="hidden" name="h_month" value="*">
           <input type="hidden" name="h_wday" value="*">
-          <div class="u-mt15 u-mb20">
+          <div class="u-mt10 u-mb20">
             <label for="h_min_1" class="form-label first"><?=_('Run Command');?>:</label>
             <select class="form-select" name="h_min" id="h_min_1">
               <option value="*" selected="selected"><?=_('every minute');?></option>
@@ -42,7 +42,9 @@
             </select>
           </div>
           <div class="u-pt10">
-            <input type="submit" value="<?=_('generate');?>" class="button">
+            <button type="submit" class="button button-secondary">
+              <?=_('generate');?>
+            </button>
           </div>
         </form>
       </div>
@@ -52,7 +54,7 @@
           <input type="hidden" name="h_day" value="*">
           <input type="hidden" name="h_month" value="*">
           <input type="hidden" name="h_wday" value="*">
-          <div class="u-mt15 u-mb10">
+          <div class="u-mt10 u-mb10">
             <label for="h_hour_2" class="form-label first"><?=_('Run Command');?>:</label>
             <select class="form-select" name="h_hour" id="h_hour_2">
               <option value="*" selected="selected"><?=_('every hour');?></option>
@@ -71,7 +73,9 @@
             </select>
           </div>
           <div class="u-pt10">
-            <input type="submit" value="<?=_('generate');?>" class="button">
+            <button type="submit" class="button button-secondary">
+              <?=_('generate');?>
+            </button>
           </div>
         </form>
       </div>
@@ -80,7 +84,7 @@
         <form>
           <input type="hidden" name="h_month" value="*">
           <input type="hidden" name="h_wday" value="*">
-          <div class="u-mt15 u-mb10">
+          <div class="u-mt10 u-mb10">
             <label for="h_day_3" class="form-label first"><?=_('Run Command');?>:</label>
             <select class="form-select" name="h_day" id="h_day_3">
               <option value="*" selected="selected"><?=_('every day');?></option>
@@ -139,7 +143,9 @@
             </select>
           </div>
           <div class="u-pt10">
-            <input type="submit" value="<?=_('generate');?>" class="button">
+            <button type="submit" class="button button-secondary">
+              <?=_('generate');?>
+            </button>
           </div>
         </form>
       </div>
@@ -148,7 +154,7 @@
         <form>
           <input type="hidden" name="h_month" value="*">
           <input type="hidden" name="h_day" value="*">
-          <div class="u-mt15 u-mb10">
+          <div class="u-mt10 u-mb10">
             <label for="h_wday_4" class="form-label first"><?=_('Run Command');?>:</label>
             <select class="form-select" name="h_wday" id="h_wday_4">
               <option value="*" selected="selected"><?=_('every day');?></option>
@@ -210,7 +216,9 @@
             </select>
           </div>
           <div class="u-pt10">
-            <input type="submit" value="<?=_('generate');?>" class="button">
+            <button type="submit" class="button button-secondary">
+              <?=_('generate');?>
+            </button>
           </div>
         </form>
       </div>
@@ -218,7 +226,7 @@
       <div id="tabs-5">
         <form>
           <input type="hidden" name="h_wday" value="*">
-          <div class="u-mt15 u-mb10">
+          <div class="u-mt10 u-mb10">
             <label for="h_month_5" class="form-label first"><?=_('Run Command');?>:</label>
             <select class="form-select" name="h_month" id="h_month_5">
               <option value="*" selected="selected"><?=_('every month');?></option>
@@ -321,7 +329,9 @@
             </select>
           </div>
           <div class="u-pt10">
-            <input type="submit" value="<?=_('generate');?>" class="button">
+            <button type="submit" class="button button-secondary">
+              <?=_('generate');?>
+            </button>
           </div>
         </form>
       </div>
@@ -332,8 +342,8 @@
     <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
     <input type="hidden" name="save" value="save">
 
-    <div class="app-form">
-      <h1 class="page-title"><?=_('Editing Cron Job');?></h1>
+    <div class="form-container">
+      <h1 class="form-title"><?=_('Editing Cron Job');?></h1>
       <?php show_alert_message($_SESSION);?>
       <div class="u-mb20">
         <label for="v_cmd" class="form-label"><?=_('Command');?></label>
