@@ -1,5 +1,9 @@
 <div class="hidden" id="token" token="<?=$_SESSION['token']?>"></div>
+<?php
 
+include $_SERVER['HESTIA'] . '/web/templates/header/aside_hestia.html';
+
+?>
 <header class="top-bar">
   <div class="l-center top-bar-inner">
 
@@ -102,7 +106,7 @@
             <?php if (($_SESSION['userContext'] === 'admin') && (!empty($_SESSION['look']))) {?>
               <!-- Hide 'Server Settings' button when impersonating 'admin' or other users -->
             <?php } else { ?>
-              <li class="top-bar-nav-item">
+              <li class="top-bar-nav-item mobile-hide">
                 <a title="<?=_('Server');?>" class="top-bar-nav-link <?php if(in_array($TAB, ['SERVER', 'IP', 'RRD', 'FIREWALL'])) echo 'active' ?>" href="/list/server/">
                   <i class="fas fa-gear"></i>
                   <span class="u-hidden"><?=_('Server');?></span>
@@ -114,7 +118,7 @@
           <!-- Edit User -->
           <?php if (($_SESSION['userContext'] === 'admin') && (isset($_SESSION['look']) && ($user == 'admin'))) {?>
             <!-- Hide 'edit user' entry point from other administrators for default 'admin' account-->
-            <li class="top-bar-nav-item">
+            <li class="top-bar-nav-item mobile-hide">
               <a title="<?=_('Logs');?>" class="top-bar-nav-link <?php if($TAB == 'LOG') echo 'active' ?>" href="/list/log/">
                 <i class="fas fa-clock-rotate-left"></i>
                 <span class="u-hidden"><?=_('Logs');?></span>
@@ -122,7 +126,7 @@
             </li>
           <?php } else { ?>
             <?php if ($panel[$user]['SUSPENDED'] === 'no') {?>
-              <li class="top-bar-nav-item">
+              <li class="top-bar-nav-item mobile-hide">
                 <a title="<?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)" class="top-bar-nav-link" href="/edit/user/?user=<?=$user; ?>&token=<?=$_SESSION['token']?>">
                   <i class="fas fa-circle-user"></i>
                   <span class="u-hidden"><?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)</span>
@@ -131,8 +135,15 @@
             <?php } ?>
           <?php } ?>
 
+          <li class="top-bar-nav-item mobile-show desktop-hide">
+            <a title="<?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)" class="top-bar-nav-link" href="#" data-action="menu-right-open">
+              <i class="fas fa-circle-user"></i>
+              <span class="u-hidden"><?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)</span>
+            </a>
+          </li>
+
           <!-- Help / Documentation-->
-          <li class="top-bar-nav-item">
+          <li class="top-bar-nav-item mobile-hide">
             <a title="<?=_('Help');?>" class="top-bar-nav-link" href="https://docs.hestiacp.com/" target="_blank" rel="noopener">
               <i class="fas fa-circle-question"></i>
               <span class="u-hidden"><?=_('Help');?></span>
@@ -141,14 +152,14 @@
 
           <!-- Logout -->
           <?php if (isset($_SESSION['look']) && (!empty($_SESSION['look']))) { ?>
-            <li class="top-bar-nav-item">
+            <li class="top-bar-nav-item mobile-hide">
               <a title="<?=_('Log out');?> (<?=$user?>)" class="top-bar-nav-link top-bar-nav-link-logout" href="/logout/?token=<?=$_SESSION['token']?>">
                 <i class="fas fa-circle-up"></i>
                 <span class="u-hidden"><?=_('Log out');?> (<?=$user?>)</span>
               </a>
             </li>
           <?php } else { ?>
-            <li class="top-bar-nav-item">
+            <li class="top-bar-nav-item mobile-hide">
               <a title="<?=_('Log out');?>" class="top-bar-nav-link top-bar-nav-link-logout" href="/logout/?token=<?=$_SESSION['token']?>">
                 <i class="fas fa-right-from-bracket"></i>
                 <span class="u-hidden"><?=_('Log out');?></span>
