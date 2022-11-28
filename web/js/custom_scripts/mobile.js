@@ -26,6 +26,14 @@
                 if(aside.hasClass('active')){
                     aside.removeClass('active');
                 }
+                var ul=aside.find('.sub-menu.active');
+                ul.each(function(){
+                    var u=$(this);
+                    u.removeClass('active');
+                    var i=u.prev().children('.box-icon');
+                    i.removeClass('active');
+                    i.attr('data-action','open-submenu');
+                });
             break;
             case 'close-left-menu':
             case 'menu-left-close':
@@ -33,6 +41,14 @@
                 if(aside.hasClass('active')){
                     aside.removeClass('active');
                 }
+                var ul=aside.find('.sub-menu.active');
+                ul.each(function(){
+                    var u=$(this);
+                    u.removeClass('active');
+                    var i=u.prev().children('.box-icon');
+                    i.removeClass('active');
+                    i.attr('data-action','open-submenu');
+                });
             break;
         }
     }).on('click','.box-icon[data-action="open-submenu"],.box-icon[data-action="close-submenu"]',function(e){
@@ -47,17 +63,31 @@
             case 'open-submenu':
                 if(!ul.hasClass('active')){
                     ul.addClass('active');
-                    t.attr('data-action','close-submenu');
+                    var i=ul.prev().children('.box-icon');
+                    i.addClass('active');
+                    i.attr('data-action','close-submenu');
                 }
+                var siblings=ul.parent().siblings().find('.sub-menu.active');
+                siblings.each(function(){
+                    var u=$(this);
+                    u.removeClass('active');
+                    var i=u.prev().children('.box-icon');
+                    i.removeClass('active');
+                    i.attr('data-action','open-submenu');
+                })
             break;
             case 'close-submenu':
                 if(ul.hasClass('active')){
                     ul.removeClass('active');
-                    t.attr('data-action','open-submenu');
-                    ul.find('.sub-menu').each(function(){
+                    var i=ul.prev().children('.box-icon');
+                    i.removeClass('active');
+                    i.attr('data-action','open-submenu');
+                    ul.find('.sub-menu.active').each(function(){
                         var u=$(this);
+                        u.removeClass('active');
                         var i=u.prev().children('.box-icon');
-                        t.attr('data-action','open-submenu');
+                        i.removeClass('active');
+                        i.attr('data-action','open-submenu');
                     });
                 }
             break;

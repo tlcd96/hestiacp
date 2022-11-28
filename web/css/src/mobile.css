@@ -131,17 +131,52 @@
   }
 
   aside.menu .mobile_menu .nav-item a.nav-link {
-      display: block;
+      display: flex;
       font-size: 1rem;
       line-height: 40px;
       flex: 1 0 auto;
   }
+  aside.menu .mobile_menu .nav-link .box-icon {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      text-align: center;
+  }
+  aside.menu .mobile_menu .nav-link .info-legend {
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+  }
 
+  aside.menu .mobile_menu .nav-link .info-legend p.legend {
+      line-height: 26px;
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+
+  aside.menu .mobile_menu .nav-link .info-legend p.info {
+    line-height: 14px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+aside.menu .mobile_menu .nav-link .box-icon i {
+    margin-left: 0px !important;
+}
   aside.menu .mobile_menu .nav-item .opener {
       width: 40px;
       height: 40px;
       text-align: center;
       line-height: 40px;
+      border: 1px solid var(--alert-border-color);
+  }
+
+  aside.menu .mobile_menu .nav-item .opener .box-icon {
+    transform: rotate(0deg);
+    transition: transform 0.25s linear;
+  }
+  aside.menu .mobile_menu .nav-item .opener .box-icon.active {
+      transform: rotate(90deg);
   }
   aside.menu .mobile_menu .nav-item ul.sub-menu {
       background-color: #00000026;
