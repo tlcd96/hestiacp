@@ -21,7 +21,7 @@ include $_SERVER['HESTIA'] . '/web/templates/header/aside_user.html';
         <!-- Do not show notifications panel when impersonating 'admin' user -->
       <?php } else { ?>
         <div class="menu-toggle-square desktop-hide">
-          <a title="<?=_('Notifications');?>" class="top-bar-nav-link js-notifications <?php if($panel[$user]['NOTIFICATIONS'] == 'yes') echo 'updates' ?>" href="#">
+          <a title="<?=_('Notifications');?>" class="js-notifications <?php if($panel[$user]['NOTIFICATIONS'] == 'yes') echo 'updates' ?>" href="#">
             <i class="fas fa-bell <?php if($panel[$user]['NOTIFICATIONS'] == 'yes') echo 'animate__animated animate__swing status-icon orange' ?>"></i>
             <span class="u-hidden"><?=_('Notifications');?></span>
           </a>
