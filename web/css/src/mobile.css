@@ -152,12 +152,14 @@
       line-height: 26px;
       margin-top: auto;
       margin-bottom: auto;
+      font-size: 18px;
   }
 
   aside.menu .mobile_menu .nav-link .info-legend p.info {
     line-height: 14px;
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 12px;
 }
 
 aside.menu .mobile_menu .nav-link .box-icon i {
