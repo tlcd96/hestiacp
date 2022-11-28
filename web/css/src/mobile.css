@@ -1,13 +1,11 @@
 @media screen and (max-width:991px){
   /** aside **/
   aside.menu {
-    &{
       width:0px;
       height:0px;
       position:fixed;
       top:0px;
       z-index:1000;
-    }
   }
   aside.menu.right>.contents{
     border-right: 1px solid var(--color-border);
@@ -218,10 +216,12 @@ aside.menu .mobile_menu .nav-link .box-icon i {
       height: 40px;
       display: inline-block;
       text-align: center;
-    &>i{
-      line-height:40px;
-      font-size: 1.1rem;
-    }
+  }
+  .top-bar-left a.menu-toggle-square i,
+  .top-bar-left div.menu-toggle-square i,
+  .menu-toggle-square i{
+    line-height:40px;
+    font-size: 1.1rem;
   }
   nav.top-bar-nav, nav.top-bar-nav .top-bar-nav-list {
     min-width: 100%;
