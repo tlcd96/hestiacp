@@ -150,13 +150,6 @@ include $_SERVER['HESTIA'] . '/web/templates/header/aside_user.html';
             <?php } ?>
           <?php } ?>
 
-          <li class="top-bar-nav-item mobile-hide">
-            <a title="<?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)" class="top-bar-nav-link" href="#" data-action="menu-right-open">
-              <i class="fas fa-circle-user"></i>
-              <span class="u-hidden"><?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)</span>
-            </a>
-          </li>
-
           <!-- Help / Documentation-->
           <li class="top-bar-nav-item mobile-hide">
             <a title="<?=_('Help');?>" class="top-bar-nav-link" href="https://docs.hestiacp.com/" target="_blank" rel="noopener">
