@@ -1,18 +1,27 @@
+<?php
+// Data
+exec (HESTIA_CMD."v-list-sys-info json", $output, $return_var);
+$sys = json_decode(implode('', $output), true);
+unset($output);
+?>
 <aside class="menu right">
+  <div class="backdrop" data-action="close-right-menu"></div>
   <div class="contents">
     <div class="panel">
       <div class="js_control">
-        <span data-action="menu-right-close"><i class="fa fa-times"></i></span>
+        <span class="menu-toggle-square" data-action="menu-right-close"><i class="fa fa-times"></i></span>
         <?php if (($_SESSION['userContext'] === 'admin') && (isset($_SESSION['look']) && ($user == 'admin'))) {?>
           <a href="/list/log/" class="<?php if($TAB == 'LOG') echo 'active' ?>"><i class="fas fa-clock-rotate-left"></i> <?=_('Logs');?></a>
-          <?php } else { ?>
-            <?php if ($panel[$user]['SUSPENDED'] === 'no') {?>
-              <a href="/edit/user/?user=<?=$user; ?>&token=<?=$_SESSION['token']?>">
-                <i class="fas fa-circle-user"></i>
-                <span><?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)</span>
-              </a>
-            <?php } ?>
-          <?php } ?>
+        <?php } ?>
+        <?php if ($panel[$user]['SUSPENDED'] === 'no') {?>
+          <div class="context-user">
+            <i class="fas fa-circle-user"></i>
+            <span><?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)</span>
+          </div>
+          <a href="/edit/user/?user=<?=$user; ?>&token=<?=$_SESSION['token']?>"  class="menu-toggle-square">
+            <i class="fas fa-pencil"></i>
+          </a>
+        <?php } ?>
       </div>
     </div>
     <div class="sub_panel">
@@ -49,7 +58,16 @@
               </div>
             </div>
             <ul class="sub-menu">
-
+              <li class="nav-item">
+                <div class="l-unit__stat-col l-unit__stat-col--right">
+                <?php if ($sys['sysinfo']['RELEASE'] != 'release') { ?>
+                  <i class="fas fa-flask icon-large status-icon red" title="<?=$sys['sysinfo']['RELEASE'];?>"></i>
+                <?php } ?>
+                <?php if ($sys['sysinfo']['RELEASE'] == 'release') { ?>
+                  <i class="fas fa-cube icon-large status-icon" title="<?=_('Production release');?>"></i>
+                <?php } ?>
+                &nbsp;v<?=$sys['sysinfo']['HESTIA']?></div>
+              </li>
             </ul>
           </li>
         <?php } ?>
