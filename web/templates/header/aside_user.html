@@ -3,6 +3,11 @@
 exec (HESTIA_CMD."v-list-sys-info json", $output, $return_var);
 $sys = json_decode(implode('', $output), true);
 unset($output);
+
+//autoupdates
+exec (HESTIA_CMD."v-list-sys-hestia-autoupdate plain", $output, $return_var);
+$autoupdate = $output['0'];
+unset($output);
 ?>
 <aside class="menu right desktop-hide">
   <div class="backdrop" data-action="close-right-menu"></div>
@@ -62,16 +67,196 @@ unset($output);
               </div>
             </div>
             <ul class="sub-menu">
-              <li class="nav-item">
-                <div class="l-unit__stat-col l-unit__stat-col--right">
-                <?php if ($sys['sysinfo']['RELEASE'] != 'release') { ?>
-                  <i class="fas fa-flask icon-large status-icon red" title="<?=$sys['sysinfo']['RELEASE'];?>"></i>
-                <?php } ?>
-                <?php if ($sys['sysinfo']['RELEASE'] == 'release') { ?>
-                  <i class="fas fa-cube icon-large status-icon" title="<?=_('Production release');?>"></i>
-                <?php } ?>
-                &nbsp;v<?=$sys['sysinfo']['HESTIA']?></div>
-              </li>
+                <!-- Start of admin menu -->
+                <li class="nav-item">
+                  <a href="/edit/server/" class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas fa-gear status-icon maroon"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        <?=_('Configure');?>
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/list/rrd/" class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas fa-chart-area status-icon blue"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        <?=_('Graphs');?>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="opener">
+                    <div class="box-icon" data-action="open-submenu">
+                      <i class="fa fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <ul class="sub-menu">
+                    <li class="nav-item">
+                      <a href="/list/server/?cpu" class="nav-link" title="ctrl+Enter">
+                        <div class="box-icon"><i class="fas fa-chart-pie status-icon green"></i></div>
+                        <div class="info-legend">
+                          <p class="legend">
+                            <?=_('View Advanced Details');?>
+                          </p>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a href="/list/updates/" class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas fa-arrows-rotate status-icon green"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        <?=_('Updates');?>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="opener">
+                    <div class="box-icon" data-action="open-submenu">
+                      <i class="fa fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <ul class="sub-menu">
+                    <li class="nav-item">
+                      <?php
+                        if($autoupdate == 'Enabled') {
+                          $btn_url = '/delete/cron/autoupdate/?token='.$_SESSION['token'].'';
+                          $btn_icon = 'fa-toggle-on status-icon green';
+                          $btn_label = _('Disable automatic updates');
+                        } else {
+                          $btn_url = '/add/cron/autoupdate/?token='.$_SESSION['token'].'';
+                          $btn_icon = 'fa-toggle-off status-icon red';
+                          $btn_label = _('Enable automatic updates');
+                        }
+                      ?>
+                      <a href="<?=$btn_url;?>" class="nav-link" title="ctrl+Enter">
+                        <div class="box-icon"><i class="fas <?=$btn_icon;?>"></i></div>
+                        <div class="info-legend">
+                          <p class="legend">
+                            <?=$btn_label;?>
+                          </p>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a href="/list/ip/" class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas fa-ethernet status-icon blue"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        <?=_('Network');?>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="opener">
+                    <div class="box-icon" data-action="open-submenu">
+                      <i class="fa fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <ul class="sub-menu">
+                    <li class="nav-item">
+                      <a href="/add/ip/" class="nav-link" title="ctrl+Enter">
+                        <div class="box-icon"><i class="fas fa-circle-plus status-icon green"></i></div>
+                        <div class="info-legend">
+                          <p class="legend">
+                            <?=_('Add IP Address');?>
+                          </p>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <?php if (!empty($_SESSION['FIREWALL_SYSTEM']) && $_SESSION['FIREWALL_SYSTEM'] == "iptables" ) {?>
+                  <li class="nav-item">
+                    <a href="/list/firewall/" class="nav-link" title="ctrl+Enter">
+                      <div class="box-icon">
+                        <i class="fas fa-shield-halved status-icon red"></i>
+                      </div>
+                      <div class="info-legend">
+                        <p class="legend">
+                          <?=_('Firewall');?>
+                        </p>
+                      </div>
+                    </a>
+                    <div class="opener">
+                      <div class="box-icon" data-action="open-submenu">
+                        <i class="fa fa-chevron-right"></i>
+                      </div>
+                    </div>
+                    <ul class="sub-menu">
+                      <li class="nav-item">
+                        <a href="/add/firewall/" class="nav-link" title="ctrl+Enter">
+                          <div class="box-icon"><i class="fas fa-circle-plus status-icon green"></i></div>
+                          <div class="info-legend">
+                            <p class="legend">
+                              <?=_('Add Rule');?>
+                            </p>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/list/firewall/banlist/" class="nav-link" title="ctrl+Enter">
+                          <div class="box-icon"><i class="fas fa-eye status-icon red"></i></div>
+                          <div class="info-legend">
+                            <p class="legend">
+                              <?=_('Manage Banned IPs');?>
+                            </p>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/list/firewall/ipset/" class="nav-link" title="ctrl+Enter">
+                          <div class="box-icon"><i class="fas fa-list status-icon blue"></i></div>
+                          <div class="info-legend">
+                            <p class="legend">
+                              <?=_('Manage IP lists');?>
+                            </p>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                <?php }?>
+                <li class="nav-item">
+                  <a href="/list/log/?user=system&token=<?=$_SESSION['token']?>" class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas fa-binoculars status-icon orange"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        <?=_('Logs');?>
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <!-- No Restart here because of messing with unknown javascript -->
+                <!-- End of admin menu -->
+
+                <li class="nav-item-separator"></li>
+                <li class="nav-item">
+                  <a class="nav-link" title="ctrl+Enter">
+                    <div class="box-icon">
+                      <i class="fas icon-large status-icon <?php echo ($sys['sysinfo']['RELEASE'] == 'release')?'fa-cube':'fa-flask red'; ?>" title="<?=$sys['sysinfo']['RELEASE'];?>"></i>
+                    </div>
+                    <div class="info-legend">
+                      <p class="legend">
+                        v<?=$sys['sysinfo']['HESTIA']?>
+                      </p>
+                    </div>
+                  </a>
+                </li>
             </ul>
           </li>
         <?php } ?>
