@@ -89,3 +89,8 @@ summary {
     display: none;
   }
 }
+.debug-panel-header {
+  & ~ .top-bar {
+    top: 40px;
+  }
+}
