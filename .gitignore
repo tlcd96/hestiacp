@@ -17,12 +17,3 @@ npm-debug.log
 .vs
 .nova
 /.idea/
-conf
-data
-log
-nginx
-php
-ssl
-web/fm
-web/rrd
-web/inc/vendor
