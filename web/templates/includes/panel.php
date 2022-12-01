@@ -1,11 +1,16 @@
 <div id="token" token="<?=$_SESSION['token']?>"></div>
-
+<?php
+require $_SERVER['HESTIA'] . "/web/templates/header/aside_user.php";
+require $_SERVER['HESTIA'] . "/web/templates/header/aside_hestia.php";
+?>
 <header class="top-bar">
 	<div class="l-center top-bar-inner">
 
 		<!-- Logo / Usage Statistics wrapper -->
 		<div class="top-bar-left">
-
+			<a class="menu-toggle-square desktop-hide" data-action="menu-left-open">
+				<i class="fas fa-bars"></i>
+			</a>
 			<!-- Logo / Home Button -->
 			<a href="<?=htmlspecialchars($home_url)?>" class="top-bar-logo" title="<?=_('Hestia Control Panel');?>">
 				<img src="/images/logo-header.svg" alt="<?=_('Hestia Control Panel');?>" width="54" height="29">
@@ -47,17 +52,20 @@
 			<?php if (($_SESSION['userContext'] === 'admin') && (isset($_SESSION['look']) && ($user == 'admin'))) {?>
 				<!-- Do not show notifications panel when impersonating 'admin' user -->
 			<?php } else { ?>
-				<div class="top-bar-notifications">
+				<a class="menu-toggle-square top-bar-notifications">
 					<button type="button" class="top-bar-nav-link js-notifications" title="<?=_('Notifications');?>">
 						<i class="fas fa-bell <?php if($panel[$user]['NOTIFICATIONS'] == 'yes') echo 'animate__animated animate__swing status-icon orange' ?>"></i>
 						<span class="u-hidden"><?=_('Notifications');?></span>
 					</button>
 					<ul class="notification-container animate__animated animate__fadeIn u-hidden"></ul>
-				</div>
+				</a>
 			<?php } ?>
+			<a class="menu-toggle-square desktop-hide" data-action="menu-right-open">
+				<i class="fas fa-circle-user" data-action="menu-right-open"></i>
+			</a>
 
 			<!-- Menu -->
-			<nav class="top-bar-nav">
+			<nav class="top-bar-nav mobile-hide">
 
 				<button type="button" class="top-bar-nav-link u-hide-tablet js-toggle-top-bar-menu" title="<?=_('Toggle menu');?>">
 					<i class="fas fa-bars"></i>
@@ -158,7 +166,7 @@
 <div class="l-content">
 	<div class="l-center">
 
-		<nav class="main-menu">
+		<nav class="main-menu mobile-hide">
 			<ul class="main-menu-list">
 
 				<!-- Users tab -->
