@@ -34,3 +34,14 @@ npm-debug.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+#development on active host
+conf
+data
+log
+nginx
+php
+ssl
+web/fm
+web/rrd
+web/inc/vendor
