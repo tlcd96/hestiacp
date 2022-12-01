@@ -54,5 +54,6 @@
     <i class="fas fa-arrow-up"></i>
     <span class="u-hidden"><?=_('Top');?></span>
   </button>
+
 </body>
 </html>

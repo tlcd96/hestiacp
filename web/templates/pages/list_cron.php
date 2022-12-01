@@ -7,7 +7,7 @@
         <?php if($panel[$user_plain]['CRON_REPORTS'] == 'yes') { ?>
           <a class="button button-secondary" href="/delete/cron/reports/?token=<?=$_SESSION['token'];?>"><i class="fas fa-toggle-off status-icon green"></i><?=_('turn off notifications');?></a>
         <?php } else { ?>
-          <a class="button button-secondary" href="/add/cron/reports/?token=<?=$_SESSION['token'];?>"><i class="fas fa-toggle-on status-icon grey"></i><?=_('turn on notifications');?></a>
+          <a class="button button-secondary" href="/add/cron/reports/?token=<?=$_SESSION['token'];?>"><i class="fas fa-toggle-off status-icon grey"></i><?=_('turn on notifications');?></a>
         <?php } ?>
       <?php } ?>
     </div>
