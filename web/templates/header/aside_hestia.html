@@ -1,4 +1,5 @@
 <?php
+  include '/usr/local/hestia/web/inc/policies.php';
   list($http_host, $port) = explode(':', $_SERVER["HTTP_HOST"].":");
   $db_myadmin_link = "//".$http_host."/phpmyadmin/";
   $db_pgadmin_link = "//".$http_host."/phppgadmin/";
