@@ -45,3 +45,9 @@ lerna-debug.log*
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# on live server
+php
+web/fm
+data
+nginx
