@@ -1,4 +1,4 @@
-	</div>
+	</main>
 <?php
 	if (($_SESSION['userContext'] === 'admin') && ($_SESSION['POLICY_SYSTEM_HIDE_SERVICES'] !== 'yes')) {
 		if ($_SESSION['UPDATE_AVAILABLE'] === 'yes') {
@@ -54,6 +54,12 @@
 		<i class="fas fa-arrow-up"></i>
 		<span class="u-hidden"><?=_('Top');?></span>
 	</button>
+
+	<?php
+		if (($_SESSION['DEBUG_MODE']) == "true") {
+			require $_SERVER['HESTIA'] . '/web/templates/pages/debug_panel.php';
+		}
+	?>
 
 </body>
 </html>
