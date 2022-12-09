@@ -8,6 +8,7 @@
 @import url("../fonts");
 @import url("../base");
 @import url("../utilities");
+@import url("../mobile");
 
 :root {
 	--animate-duration: 300ms;

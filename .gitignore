@@ -51,3 +51,17 @@ npm-debug.log
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# Development on Active Host
+conf
+data
+logs
+log
+nginx
+node_modules
+php
+ssl
+web/fm
+web/rrd
+web/vendor
+web/inc/vendor

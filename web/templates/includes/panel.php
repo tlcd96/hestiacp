@@ -7,7 +7,9 @@
 
 			<!-- Logo / Usage Statistics wrapper -->
 			<div class="top-bar-left">
-
+				<a class="menu-toggle-square desktop-hide" data-action="menu-left-open">
+					<i class="fas fa-bars"></i>
+				</a>
 				<!-- Logo / Home Button -->
 				<a href="<?= htmlspecialchars($home_url) ?>" class="top-bar-logo" title="<?= _("Hestia Control Panel") ?>">
 					<img src="/images/logo-header.svg" alt="<?= _("Hestia Control Panel") ?>" width="54" height="29">
@@ -115,9 +117,11 @@
 						</ul>
 					</div>
 				<?php } ?>
-
+				<a class="menu-toggle-square desktop-hide" data-action="menu-right-open">
+					<i class="fas fa-circle-user" data-action="menu-right-open"></i>
+				</a>
 				<!-- Menu -->
-				<nav x-data="{ open: false }" class="top-bar-menu">
+				<nav x-data="{ open: false }" class="top-bar-menu mobile-hide">
 
 					<button x-on:click="open = !open" type="button" class="top-bar-menu-link u-hide-tablet" title="<?= _("Toggle menu") ?>">
 						<i class="fas fa-bars"></i>
