@@ -145,6 +145,11 @@
 		font-size: 1rem;
 		line-height: 40px;
 		flex: 1 0 auto;
+		color: var(--color-text);
+	}
+
+	aside.menu .mobile_menu .nav-item a.nav-link.active {
+		border-left: 2px solid var(--color-text-link-hover);
 	}
 
 	aside.menu .mobile_menu .nav-link .box-icon {
@@ -207,7 +212,6 @@
 		padding: 12px;
 		height: auto;
 	}
-
 	/** end aside **/
 	header .l-center.top-bar-inner {
 		flex: 1 1 auto;
@@ -224,13 +228,14 @@
 		display: none;
 	}
 
+	.menu-toggle-square,
 	.top-bar-left a.menu-toggle-square,
-	.top-bar-left div.menu-toggle-square,
-	.menu-toggle-square {
-		width: 40px;
-		height: 40px;
+	.top-bar-left div.menu-toggle-square {
 		display: inline-block;
+		height: 40px;
 		text-align: center;
+		width: 40px;
+		color: var(--color-text);
 	}
 
 	.menu-toggle-square > button {

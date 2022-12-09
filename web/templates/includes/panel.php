@@ -1,5 +1,8 @@
 <div id="token" token="<?= $_SESSION["token"] ?>"></div>
-
+<?php
+include $_SERVER['HESTIA'] . '/web/templates/includes/aside_hestia.php';
+include $_SERVER['HESTIA'] . '/web/templates/includes/aside_user.php';
+?>
 <header class="app-header">
 
 	<div class="top-bar">
@@ -219,7 +222,7 @@
 		</div>
 	</div>
 
-	<nav x-data="{ open: false }" class="main-menu">
+	<nav x-data="{ open: false }" class="main-menu mobile-hide">
 		<div class="container">
 			<button x-on:click="open = !open" type="button" class="main-menu-toggle">
 				<i class="fas fa-bars"></i>
