@@ -3,35 +3,9 @@
 
 <head>
 	<!-- Load necessary CSS and JavaScript from source -->
-	<?php require ''.$_SERVER['HESTIA'].'/web/templates/includes/title.php'; ?>
-	<?php require ''.$_SERVER['HESTIA'].'/web/templates/includes/css.php'; ?>
-	<?php require ''.$_SERVER['HESTIA'].'/web/templates/includes/top_js.php'; ?>
-	<script>
-		<?php
-			// GLOBAL SETTINGS
-		?>
-		var GLOBAL = {};
-		GLOBAL.FTP_USER_PREFIX = '';
-		GLOBAL.DB_USER_PREFIX = '';
-		GLOBAL.DB_DBNAME_PREFIX = '';
-		GLOBAL.AJAX_URL = '';
-	</script>
-	<script src="/js/vendor/jquery.cookie.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/vendor/jquery-ui.min.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/vendor/jquery.finder.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/hotkeys.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/events.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/app.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/init.js?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/i18n.js.php?<?=JS_LATEST_UPDATE?>"></script>
-	<script src="/js/templates.js?<?=JS_LATEST_UPDATE?>"></script>
-	<?php foreach(new DirectoryIterator($_SERVER['HESTIA'].'/web/js/custom_scripts') as $customScript){
-		if($customScript->getExtension() === 'js'){
-			echo '<script src="/js/custom_scripts/'.rawurlencode($customScript->getBasename()).'"></script>';
-		} elseif($customScript->getExtension() === "php"){
-			require_once($customScript->getPathname());
-		}
-	 } ?>
+	<?php require "" . $_SERVER["HESTIA"] . "/web/templates/includes/title.php"; ?>
+	<?php require "" . $_SERVER["HESTIA"] . "/web/templates/includes/css.php"; ?>
+	<?php require "" . $_SERVER["HESTIA"] . "/web/templates/includes/js.php"; ?>
 </head>
 
 <body>
@@ -39,51 +13,51 @@
 		<div class="top-bar">
 			<div class="container top-bar-inner">
 				<div class="top-bar-left">
-					<a href="/" class="top-bar-logo" title="<?=_('Hestia Control Panel');?>">
-						<img src="/images/logo-header.svg" alt="<?=_('Hestia Control Panel');?>" width="54" height="29">
+					<a href="/" class="top-bar-logo" title="<?= _("Hestia Control Panel") ?>">
+						<img src="/images/logo-header.svg" alt="<?= _("Hestia Control Panel") ?>" width="54" height="29">
 					</a>
 				</div>
 				<div class="top-bar-right">
-					<nav class="top-bar-menu">
-						<button type="button" class="top-bar-menu-link u-hide-tablet js-toggle-top-bar-menu" title="<?=_('Toggle menu');?>">
+					<nav x-data="{ open: false }" class="top-bar-menu">
+						<button x-on:click="open = !open" type="button" class="top-bar-menu-link u-hide-tablet" title="<?= _("Toggle menu") ?>">
 							<i class="fas fa-bars"></i>
-							<span class="u-hidden"><?=_('Toggle menu');?></span>
+							<span class="u-hidden"><?= _("Toggle menu") ?></span>
 						</button>
-						<ul class="top-bar-menu-list animate__animated animate__fadeIn">
+						<ul x-cloak x-show="open" class="top-bar-menu-list animate__animated animate__fadeIn">
 							<li class="top-bar-menu-item">
 								<a class="top-bar-menu-link" href="/list/web/">
 									<i class="fas fa-circle-left"></i>
-									<span class="top-bar-menu-link-label"><?=_('Back');?></span>
+									<span class="top-bar-menu-link-label"><?= _("Back") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
 								<a class="top-bar-menu-link <?php if($_GET['type'] == 'access') echo 'active' ?>" href="/list/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=access&token=<?=$_SESSION['token']?>">
 									<i class="fas fa-eye"></i>
-									<span class="top-bar-menu-link-label"><?=_('Access Log');?></span>
+									<span class="top-bar-menu-link-label"><?= _("Access Log") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
-								<a class="top-bar-menu-link <?php if($_GET['type'] == 'access') echo 'active' ?>" href="/download/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=access&&token=<?=$_SESSION['token']?>" title="<?=_('Download');?>">
+								<a class="top-bar-menu-link <?php if($_GET['type'] == 'access') echo 'active' ?>" href="/download/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=access&&token=<?=$_SESSION['token']?>" title="<?= _("Download") ?>">
 									<i class="fas fa-download"></i>
-									<span class="u-hidden"><?=_('Download');?></span>
+									<span class="u-hidden"><?= _("Download") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
 								<a class="top-bar-menu-link <?php if($_GET['type'] == 'error') echo 'active' ?>" href="/list/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=error&token=<?=$_SESSION['token']?>">
 									<i class="fas fa-circle-exclamation"></i>
-									<span class="top-bar-menu-link-label"><?=_('Error Log');?></span>
+									<span class="top-bar-menu-link-label"><?= _("Error Log") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
-								<a class="top-bar-menu-link <?php if($_GET['type'] == 'error') echo 'active' ?>" href="/download/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=error&token=<?=$_SESSION['token']?>" title="<?=_('Download');?>">
+								<a class="top-bar-menu-link <?php if($_GET['type'] == 'error') echo 'active' ?>" href="/download/web-log/?domain=<?=htmlentities($_GET['domain'])?>&type=error&token=<?=$_SESSION['token']?>" title="<?= _("Download") ?>">
 									<i class="fas fa-download"></i>
-									<span class="u-hidden"><?=_('Download');?></span>
+									<span class="u-hidden"><?= _("Download") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
-								<a class="top-bar-menu-link" href="javascript:location.reload();" title="<?=_('Refresh');?>">
+								<a class="top-bar-menu-link" href="javascript:location.reload();" title="<?= _("Refresh") ?>">
 									<i class="fas fa-arrow-rotate-right"></i>
-									<span class="u-hidden"><?=_('Refresh');?></span>
+									<span class="u-hidden"><?= _("Refresh") ?></span>
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
@@ -93,9 +67,9 @@
 								</a>
 							</li>
 							<li class="top-bar-menu-item">
-								<a class="top-bar-menu-link top-bar-menu-link-logout" href="/logout/?token=<?=$_SESSION['token']?>" title="<?=_('Log out');?>">
+								<a class="top-bar-menu-link top-bar-menu-link-logout" href="/logout/?token=<?=$_SESSION['token']?>" title="<?= _("Log out") ?>">
 									<i class="fas fa-right-from-bracket"></i>
-									<span class="u-hidden"><?=_('Log out');?></span>
+									<span class="u-hidden"><?= _("Log out") ?></span>
 								</a>
 							</li>
 						</ul>
@@ -105,10 +79,14 @@
 		</div>
 	</header>
 
-	<button type="button" class="button button-secondary button-circle button-floating button-floating-top js-to-top" title="<?=_('Top');?>">
+	<a
+		href="#top"
+		class="button button-secondary button-circle button-floating button-floating-top "
+		title="<?= _("Top") ?>"
+	>
 		<i class="fas fa-arrow-up"></i>
-		<span class="u-hidden"><?=_('Top');?></span>
-	</button>
+		<span class="u-hidden"><?= _("Top") ?></span>
+	</a>
 
-	<div class="container" style="padding-top: 80px;"><?=sprintf(_('Last 70 lines of %s.%s.log'),htmlentities($_GET['domain']),htmlentities($type)) ;?></div>
+	<div class="container" style="padding-top: 80px;"><?= sprintf(_("Last 70 lines of %s.%s.log"), htmlentities($_GET["domain"]), htmlentities($type)) ?></div>
 	<pre class="container console-output">
